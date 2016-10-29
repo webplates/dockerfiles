@@ -26,4 +26,5 @@ RUN set -xe \
 COPY entrypoint.sh /docker-entrypoint.sh
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
+EXPOSE 11300
 CMD ["beanstalkd"]
