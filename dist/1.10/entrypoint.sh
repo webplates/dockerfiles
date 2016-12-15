@@ -24,7 +24,7 @@ if [ "$1" = 'beanstalkd' ]; then
     fi
 
     if [ "$BEANSTALK_MAX_WAL_SIZE" ]; then
-        BEANSTALK_OPTS="$BEANSTALK_OPTS -z $BEANSTALK_MAX_WAL_SIZE"
+        BEANSTALK_OPTS="$BEANSTALK_OPTS -s $BEANSTALK_MAX_WAL_SIZE"
     fi
 
     if [ ! -z "$BEANSTALK_NO_COMPACT" ]; then
