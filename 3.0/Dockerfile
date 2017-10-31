@@ -1,6 +1,6 @@
 FROM alpine:3.6 as downloader
 
-ENV VERSION 3.0.0
+ENV VERSION 3.0.1
 ENV DOWNLOAD_URL https://github.com/mattes/migrate/releases/download/v$VERSION/migrate.linux-amd64.tar.gz
 
 RUN apk add --no-cache ca-certificates openssl
