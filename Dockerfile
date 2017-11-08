@@ -1,4 +1,4 @@
-FROM alpine:3.6 as downloader
+FROM frolvlad/alpine-glibc as downloader
 
 ENV VERSION 3.0.0
 ENV DOWNLOAD_URL https://github.com/mattes/migrate/releases/download/v$VERSION/migrate.linux-amd64.tar.gz
@@ -10,7 +10,7 @@ RUN set -xe \
     && tar xvfz migrate.linux-amd64.tar.gz -C /tmp
 
 
-FROM scratch
+FROM frolvlad/alpine-glibc
 
 COPY --from=downloader /tmp/migrate.linux-amd64 /migrate
 
