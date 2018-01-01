@@ -11,7 +11,7 @@ RUN set -xe \
         zlib-dev
 
 ENV LDFLAGS=-static
-ENV GRPC_VERSION=1.7.5
+ENV GRPC_VERSION=1.8.2
 
 RUN git clone --depth 1 --recursive -b v${GRPC_VERSION} https://github.com/grpc/grpc.git /grpc
 
