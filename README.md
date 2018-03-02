@@ -1,5 +1,7 @@
 # Beanstalkd Docker image
 
+[![Build Status](https://img.shields.io/travis/webplates/docker-beanstalkd.svg?style=flat-square)](https://travis-ci.org/webplates/docker-beanstalkd)
+
 **Docker image for [Beanstalkd](http://kr.github.io/beanstalkd).**
 
 
@@ -7,13 +9,13 @@
 
 The following command will start a beanstalkd container in the foreground:
 
-``` bash
+```bash
 $ docker run --rm webplates/beanstalkd
 ```
 
 Locally you very likely want to run it as a daemon:
 
-``` bash
+```bash
 $ docker run -d --name beanstalkd -p 11300:11300 webplates/beanstalkd
 ```
 
@@ -24,7 +26,7 @@ There is a great application called [Beanstalk Console](https://github.com/ptrof
 which runs perfectly in a [Docker container](https://github.com/ptrofimov/beanstalk_console#run-as-a-docker-container)
 and can be used with the setup above:
 
-``` bash
+```bash
 $ docker run -d --name beanstalk_console -p 80:80 --link beanstalkd -e BEANSTALKD_HOST=beanstalkd -e BEANSTALKD_PORT=11300 agaveapi/beanstalk_console
 ```
 
