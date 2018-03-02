@@ -1,0 +1,44 @@
+language: generic
+
+sudo: required
+
+services:
+    - docker
+
+env:
+    global:
+        - DOCKER_IMAGE=webplates/docker-grpc
+
+matrix:
+    include:
+        # 1.10
+        - env: GRPC_VERSION=1.10.0 DOCKER_TAG=latest
+        - env: GRPC_VERSION=1.10.0 DOCKER_TAG=1.10.0
+        - env: GRPC_VERSION=1.10.0 DOCKER_TAG=1.10
+        - env: GRPC_VERSION=1.10.0 DOCKER_TAG=1
+
+        # 1.9
+        - env: GRPC_VERSION=1.9.1 DOCKER_TAG=1.9.1
+        - env: GRPC_VERSION=1.9.1 DOCKER_TAG=1.9
+
+        # 1.8
+        - env: GRPC_VERSION=1.8.6 DOCKER_TAG=1.8.6
+        - env: GRPC_VERSION=1.8.6 DOCKER_TAG=1.8
+
+        # 1.7
+        - env: GRPC_VERSION=1.7.3 DOCKER_TAG=1.7.3
+        - env: GRPC_VERSION=1.7.3 DOCKER_TAG=1.7
+
+        # 1.6
+        - env: GRPC_VERSION=1.6.7 DOCKER_TAG=1.6.7
+        - env: GRPC_VERSION=1.6.7 DOCKER_TAG=1.6
+
+script: docker build --pull -t $DOCKER_IMAGE:$DOCKER_TAG --build-arg GRPC_VERSION=$GRPC_VERSION .
+
+deploy:
+    provider: script
+    script:
+        - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
+        - docker push $DOCKER_IMAGE:$DOCKER_TAG
+    on:
+        branch: master
