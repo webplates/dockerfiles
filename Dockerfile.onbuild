@@ -6,4 +6,4 @@ RUN mkdir -p /pip
 
 ONBUILD COPY requirements.txt /pip
 
-RUN pip install -r /pip/requirements.txt
+ONBUILD RUN pip install -r /pip/requirements.txt
