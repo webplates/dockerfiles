@@ -4,9 +4,9 @@ RUN set -x \
     && addgroup --system beanstalk \
     && adduser --disabled-password --disabled-login --system --ingroup beanstalk beanstalk
 
-ARG BREANSTALK_VERSION
+ARG BEANSTALK_VERSION
 
-RUN if [[ -z "$BREANSTALK_VERSION" ]]; then echo "BREANSTALK_VERSION argument MUST be set" && exit 1; fi
+RUN if [[ -z "$BEANSTALK_VERSION" ]]; then echo "BEANSTALK_VERSION argument MUST be set" && exit 1; fi
 
 RUN set -xe \
     && buildDeps=" \
@@ -17,7 +17,7 @@ RUN set -xe \
     && apt-get update && apt-get install -y $buildDeps ca-certificates curl tar --no-install-recommends \
     && mkdir -p /usr/src \
     && cd /usr/src \
-    && curl -fSL "https://github.com/kr/beanstalkd/archive/v${BREANSTALK_VERSION}.tar.gz" -o beanstalk.tar.gz \
+    && curl -fSL "https://github.com/kr/beanstalkd/archive/v${BEANSTALK_VERSION}.tar.gz" -o beanstalk.tar.gz \
     && mkdir /usr/src/beanstalk \
     && tar -xzf /usr/src/beanstalk.tar.gz -C "/usr/src/beanstalk" --strip-components=1 \
     && cd /usr/src/beanstalk \
