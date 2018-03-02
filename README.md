@@ -1,5 +1,7 @@
 # gRPC CLI Docker image
 
+[![Build Status](https://img.shields.io/travis/webplates/docker-grpc-cli.svg?style=flat-square)](https://travis-ci.org/webplates/docker-grpc-cli)
+
 **Docker image wrapping [gRPC CLI](https://github.com/grpc/grpc/blob/master/doc/command_line_tool.md)**
 
 
