@@ -1,4 +1,4 @@
-FROM alpine:3.6 as builder
+FROM alpine:3.7 as builder
 
 RUN set -xe \
     && apk add --no-cache \
@@ -11,7 +11,7 @@ RUN set -xe \
         zlib-dev
 
 ENV LDFLAGS=-static
-ENV GRPC_VERSION=1.6.0
+ENV GRPC_VERSION=1.10.0
 
 RUN git clone --depth 1 --recursive -b v${GRPC_VERSION} https://github.com/grpc/grpc.git /grpc
 
