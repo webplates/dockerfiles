@@ -31,8 +31,6 @@ script: docker build --pull -t $DOCKER_IMAGE:$DOCKER_TAG --build-arg BEANSTALK_V
 
 deploy:
     provider: script
-    script:
-        - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
-        - docker push $DOCKER_IMAGE:$DOCKER_TAG
+    script: docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD" && docker push $DOCKER_IMAGE:$DOCKER_TAG
     on:
         branch: master
