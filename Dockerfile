@@ -10,10 +10,13 @@ RUN set -xe \
         libtool \
         zlib-dev
 
-ENV LDFLAGS=-static
-ENV GRPC_VERSION=1.10.0
+ARG GRPC_VERSION
 
-RUN git clone --depth 1 --recursive -b v${GRPC_VERSION} https://github.com/grpc/grpc.git /grpc
+RUN set -xe \
+    && if [[ -z "$GRPC_VERSION" ]]; then echo "GRPC_VERSION argument MUST be set" && exit 1; fi \
+    && git clone --depth 1 --recursive -b v${GRPC_VERSION} https://github.com/grpc/grpc.git /grpc
+
+ENV LDFLAGS=-static
 
 RUN cd /grpc/third_party/gflags \
     && mkdir build && cd build \
