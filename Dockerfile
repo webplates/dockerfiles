@@ -12,9 +12,9 @@ RUN set -xe \
 
 ARG GRPC_VERSION
 
-RUN set -xe \
-    && if [[ -z "$GRPC_VERSION" ]]; then echo "GRPC_VERSION argument MUST be set" && exit 1; fi \
-    && git clone --depth 1 --recursive -b v${GRPC_VERSION} https://github.com/grpc/grpc.git /grpc
+RUN if [[ -z "$GRPC_VERSION" ]]; then echo "GRPC_VERSION argument MUST be set" && exit 1; fi
+
+RUN git clone --depth 1 --recursive -b v${GRPC_VERSION} https://github.com/grpc/grpc.git /grpc
 
 ENV LDFLAGS=-static
 
