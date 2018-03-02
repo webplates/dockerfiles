@@ -12,23 +12,30 @@ env:
 matrix:
     include:
         # 1.10
-        - env: BEANSTALK_VERSION=1.10 DOCKER_TAG=latest
-        - env: BEANSTALK_VERSION=1.10 DOCKER_TAG=1.10
-        - env: BEANSTALK_VERSION=1.10 DOCKER_TAG=1
+        - env: BEANSTALK_VERSION=1.10 DOCKER_TAG=latest DOCKERFILE=Dockerfile
+        - env: BEANSTALK_VERSION=1.10 DOCKER_TAG=1.10 DOCKERFILE=Dockerfile
+        - env: BEANSTALK_VERSION=1.10 DOCKER_TAG=1 DOCKERFILE=Dockerfile
+        - env: BEANSTALK_VERSION=1.10 DOCKER_TAG=latest-alpine DOCKERFILE=Dockerfile-alpine
+        - env: BEANSTALK_VERSION=1.10 DOCKER_TAG=1.10-alpine DOCKERFILE=Dockerfile-alpine
+        - env: BEANSTALK_VERSION=1.10 DOCKER_TAG=1-alpine DOCKERFILE=Dockerfile-alpine
 
         # 1.9
-        - env: BEANSTALK_VERSION=1.9 DOCKER_TAG=1.9
+        - env: BEANSTALK_VERSION=1.9 DOCKER_TAG=1.9 DOCKERFILE=Dockerfile
+        - env: BEANSTALK_VERSION=1.9 DOCKER_TAG=1.9-alpine DOCKERFILE=Dockerfile-alpine
 
         # 1.8
-        - env: BEANSTALK_VERSION=1.8 DOCKER_TAG=1.8
+        - env: BEANSTALK_VERSION=1.8 DOCKER_TAG=1.8 DOCKERFILE=Dockerfile
+        - env: BEANSTALK_VERSION=1.8 DOCKER_TAG=1.8-alpine DOCKERFILE=Dockerfile-alpine
 
         # 1.7
-        - env: BEANSTALK_VERSION=1.7 DOCKER_TAG=1.7
+        - env: BEANSTALK_VERSION=1.7 DOCKER_TAG=1.7 DOCKERFILE=Dockerfile
+        - env: BEANSTALK_VERSION=1.7 DOCKER_TAG=1.7-alpine DOCKERFILE=Dockerfile-alpine
 
         # 1.6
-        - env: BEANSTALK_VERSION=1.6 DOCKER_TAG=1.6
+        - env: BEANSTALK_VERSION=1.6 DOCKER_TAG=1.6 DOCKERFILE=Dockerfile
+        - env: BEANSTALK_VERSION=1.6 DOCKER_TAG=1.6-alpine DOCKERFILE=Dockerfile-alpine
 
-script: docker build --pull -t $DOCKER_IMAGE:$DOCKER_TAG --build-arg BEANSTALK_VERSION=$BEANSTALK_VERSION .
+script: docker build --pull -t $DOCKER_IMAGE:$DOCKER_TAG --build-arg BEANSTALK_VERSION=$BEANSTALK_VERSION -f $DOCKERFILE .
 
 deploy:
     provider: script
