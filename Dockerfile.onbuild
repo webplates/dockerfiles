@@ -1,0 +1,9 @@
+ARG PARENT_VERSION
+
+FROM webplates/locust:${PARENT_VERSION}
+
+RUN mkdir -p /pip
+
+ONBUILD COPY requirements.txt /pip
+
+RUN pip install -r /pip/requirements.txt
