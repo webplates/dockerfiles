@@ -1,8 +1,12 @@
-FROM alpine:3.4
+FROM alpine:3.7
 
 RUN set -x \
     && addgroup -S beanstalk \
     && adduser -D -S -G beanstalk beanstalk
+
+ARG BEANSTALK_VERSION
+
+RUN if [[ -z "$BEANSTALK_VERSION" ]]; then echo "BEANSTALK_VERSION argument MUST be set" && exit 1; fi
 
 RUN set -xe \
     && apk add --no-cache bash \
@@ -15,7 +19,7 @@ RUN set -xe \
     \
     && mkdir -p /usr/src \
     && cd /usr/src \
-    && curl -fSL "https://github.com/kr/beanstalkd/archive/v1.10.tar.gz" -o beanstalk.tar.gz \
+    && curl -fSL "https://github.com/kr/beanstalkd/archive/v${BEANSTALK_VERSION}.tar.gz" -o beanstalk.tar.gz \
     && mkdir /usr/src/beanstalk \
     && tar -xzf /usr/src/beanstalk.tar.gz -C "/usr/src/beanstalk" --strip-components=1 \
     && cd /usr/src/beanstalk \

@@ -4,16 +4,20 @@ RUN set -x \
     && addgroup --system beanstalk \
     && adduser --disabled-password --disabled-login --system --ingroup beanstalk beanstalk
 
+ARG BEANSTALK_VERSION
+
+RUN if [[ -z "$BEANSTALK_VERSION" ]]; then echo "BEANSTALK_VERSION argument MUST be set" && exit 1; fi
+
 RUN set -xe \
     && buildDeps=" \
         gcc \
         libtool \
         make \
     " \
-    && apt-get update && apt-get install -y $buildDeps ca-certificates curl tar --no-install-recommends && rm -rf /var/lib/apt/lists/* \
+    && apt-get update && apt-get install -y $buildDeps ca-certificates curl tar --no-install-recommends \
     && mkdir -p /usr/src \
     && cd /usr/src \
-    && curl -fSL "https://github.com/kr/beanstalkd/archive/v1.10.tar.gz" -o beanstalk.tar.gz \
+    && curl -fSL "https://github.com/kr/beanstalkd/archive/v${BEANSTALK_VERSION}.tar.gz" -o beanstalk.tar.gz \
     && mkdir /usr/src/beanstalk \
     && tar -xzf /usr/src/beanstalk.tar.gz -C "/usr/src/beanstalk" --strip-components=1 \
     && cd /usr/src/beanstalk \
@@ -21,7 +25,8 @@ RUN set -xe \
     && cp beanstalkd /usr/bin/beanstalkd \
     && cd \
     && rm -r /usr/src/beanstalk \
-    && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false $buildDeps
+    && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false $buildDeps \
+    && rm -rf /var/lib/apt/lists/*
 
 COPY entrypoint.sh /docker-entrypoint.sh
 
