@@ -5,9 +5,9 @@ ARG LOCUST_VERSION
 RUN if [[ -z "$LOCUST_VERSION" ]]; then echo "LOCUST_VERSION argument MUST be set" && exit 1; fi
 
 RUN set -xe \
-    && apk add --no-cache ca-certificates python-dev build-base \
+    && apk add --no-cache ca-certificates build-base \
     && pip install locustio==${LOCUST_VERSION} \
-    && apk del python-dev build-base
+    && apk del build-base
 
 RUN mkdir -p /locust
 

@@ -6,4 +6,7 @@ RUN mkdir -p /pip
 
 ONBUILD COPY requirements.txt /pip
 
-ONBUILD RUN pip install -r /pip/requirements.txt
+ONBUILD RUN set -xe \
+            && apk add --no-cache build-base \
+            && pip install -r /pip/requirements.txt \
+            && apk del build-base
