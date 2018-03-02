@@ -7,7 +7,7 @@ services:
 
 env:
     global:
-        - DOCKER_IMAGE=webplates/docker-grpc
+        - DOCKER_IMAGE=webplates/grpc-cli
 
 matrix:
     include:
