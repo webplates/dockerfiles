@@ -1,11 +1,17 @@
 language: generic
 
-sudo: false
+sudo: required
+
+services:
+    - docker
 
 matrix:
     include:
-        - env: IMAGE=zero
+        # Stunnel 5.43
+        - env: IMAGE=stunnel VERSION=5.43-r0 DOCKER_TAG=latest
+        - env: IMAGE=stunnel VERSION=5.43-r0 DOCKER_TAG=5.43
+        - env: IMAGE=stunnel VERSION=5.43-r0 DOCKER_TAG=5
 
 script:
     - if .travis/build-condition.sh $TRAVIS_COMMIT_RANGE $IMAGE; then export BUILD=true; else export BUILD=false; fi
-    - .travis/build.sh $IMAGE $BUILD
+    - .travis/build.sh $BUILD
