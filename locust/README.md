@@ -1,4 +1,4 @@
-# Locust Docker image
+# Locust image
 
 **Docker image for [Locust](https://locust.io)**
 
