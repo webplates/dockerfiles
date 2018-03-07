@@ -7,7 +7,9 @@ fi
 
 export DOCKER_IMAGE=webplates/$IMAGE
 
-if [[ $2 != "true" ]]; then
+if echo $TRAVIS_COMMIT_MESSAGE | grep "\[ci build all\]" > /dev/null; then
+    echo "Building all images (including this one: $DOCKER_IMAGE)"
+elif [[ $2 != "true" ]]; then
     echo "Skip building image $DOCKER_IMAGE"
     exit 0
 fi
