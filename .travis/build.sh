@@ -11,7 +11,7 @@ if echo $TRAVIS_COMMIT_MESSAGE | grep "\[ci build all\]" > /dev/null; then
     echo "Building all images (including this one: $DOCKER_IMAGE)"
 elif echo $TRAVIS_COMMIT_MESSAGE | grep "\[ci build $IMAGE\]" > /dev/null; then
     echo "Received manual build trigger for $IMAGE"
-elif [[ $2 != "true" ]]; then
+elif [[ $1 != "true" ]]; then
     echo "Skip building image $DOCKER_IMAGE"
     exit 0
 fi
