@@ -1,6 +1,7 @@
 # Beanstalkd Docker image
 
 [![Build Status](https://img.shields.io/travis/webplates/docker-beanstalkd.svg?style=flat-square)](https://travis-ci.org/webplates/docker-beanstalkd)
+[![Docker Image](https://img.shields.io/badge/docker%20image-webplates%2Fbeanstalkd-blue.svg?style=flat-square)](https://hub.docker.com/r/webplates/beanstalkd)
 
 **Docker image for [Beanstalkd](http://kr.github.io/beanstalkd).**
 
