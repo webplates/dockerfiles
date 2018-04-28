@@ -34,7 +34,7 @@ FROM gobuilder AS protoc-twirpphp
 RUN set -xe \
     && go get github.com/twirphp/twirp/protoc-gen-twirp_php \
     && cd /go/src/github.com/twirphp/twirp/protoc-gen-twirp_php \
-    && dep ensure \
+    && dep ensure -vendor-only \
     && go install
 
 
