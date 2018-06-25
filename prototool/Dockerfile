@@ -15,6 +15,8 @@ RUN set -xe \
 
 FROM alpine:3.7
 
+RUN apk add --no-cache ca-certificates openssl
+
 WORKDIR /proto
 
 COPY --from=downloader /tmp/prototool /usr/bin
