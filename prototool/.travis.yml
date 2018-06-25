@@ -1,0 +1,25 @@
+language: generic
+
+sudo: required
+
+services:
+    - docker
+
+env:
+    global:
+        - DOCKER_IMAGE=webplates/prototool
+
+matrix:
+    include:
+        # 0.4
+        - env: VERSION=0.4.0 DOCKER_TAG=latest
+        - env: VERSION=0.4.0 DOCKER_TAG=0.4.0
+        - env: VERSION=0.4.0 DOCKER_TAG=0.4
+
+script: ./build.sh
+
+deploy:
+    provider: script
+    script: docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD" && docker push $DOCKER_IMAGE:$DOCKER_TAG
+    on:
+        branch: master
