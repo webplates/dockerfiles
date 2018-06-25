@@ -13,7 +13,7 @@ RUN set -xe \
     && chmod +x /tmp/prototool
 
 
-FROM alpine:3.7
+FROM frolvlad/alpine-glibc:alpine-3.7
 
 RUN apk add --no-cache ca-certificates openssl
 
